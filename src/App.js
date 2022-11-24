@@ -4,6 +4,7 @@ import DashBoardLayout from './Layout/DashBoardLayout';
 import Main from './Layout/Main';
 import CategorisedProduct from './Pages/CategorisedProduct/CategorisedProduct';
 import Dashboard from './Pages/Dashboard/Dashboard/Dashboard';
+import AddProduct from './Pages/Dashboard/Dashboard/Seller/AddProduct';
 import Home from './Pages/Home/Home';
 import Login from './Pages/Login/Login';
 import Register from './Pages/Register/Register';
@@ -51,6 +52,10 @@ function App() {
         {
           path:'/dashboard',
           element:<Dashboard></Dashboard>
+        },
+        {
+          path:'/dashboard/addproduct',
+          element:<AddProduct></AddProduct>
         }
       ]
     }

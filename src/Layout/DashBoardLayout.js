@@ -28,12 +28,17 @@ const DashBoardLayout = () => {
                                 role === 'Seller' ?
                                     <>
                                         <li><Link to="/dashboard">My Products</Link></li>
-                                        <li><Link to="/dashboard">Add A Product</Link></li>
+                                        <li><Link to="/dashboard/addproduct">Add A Product</Link></li>
                                     </>
                                     :
+                                role === 'Admin' ?
                                     <>
                                         <li><Link to="/dashboard">All Sellers</Link></li>
                                         <li><Link to="/dashboard">All Buyers</Link></li>
+                                        <li><Link to="/dashboard">Reported Items</Link></li>
+                                    </>
+                                    :
+                                    <>
                                     </>
                         }
 
