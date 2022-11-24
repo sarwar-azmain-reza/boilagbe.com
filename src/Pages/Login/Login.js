@@ -9,8 +9,7 @@ const Login = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    // const from = location.state?.from?.pathname || '/';
-    const from = '/';
+    const from = location.state?.from?.pathname || '/';
 
     const handleLogin = event => {
         event.preventDefault();
@@ -28,7 +27,7 @@ const Login = () => {
                 }
                 setLoading(false);
                 console.log(currentUser);
-                fetch(`http://localhost:5000/jwt?email=${email}`)
+                fetch(`https://boilagbe-com-server.vercel.app/jwt?email=${email}`)
                     .then(res => res.json())
                     .then(data => {
                         if (data.accessToken) {
@@ -71,7 +70,7 @@ const Login = () => {
 
     const saveUser = (name, email) => {
         const user = { name, email, accountType: "Buyer" };
-        fetch('http://localhost:5000/admin/users', {
+        fetch('https://boilagbe-com-server.vercel.app/admin/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -81,7 +80,7 @@ const Login = () => {
             .then(res => res.json())
             .then(data => {
                 console.log('After saving', data)
-                fetch(`http://localhost:5000/jwt?email=${email}`)
+                fetch(`https://boilagbe-com-server.vercel.app/jwt?email=${email}`)
                     .then(res => res.json())
                     .then(data => {
                         if (data.accessToken) {

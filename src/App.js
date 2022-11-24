@@ -1,10 +1,14 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './App.css';
+import DashBoardLayout from './Layout/DashBoardLayout';
 import Main from './Layout/Main';
+import CategorisedProduct from './Pages/CategorisedProduct/CategorisedProduct';
+import Dashboard from './Pages/Dashboard/Dashboard/Dashboard';
 import Home from './Pages/Home/Home';
 import Login from './Pages/Login/Login';
 import Register from './Pages/Register/Register';
 import Weblogs from './Pages/Weblogs/Weblogs';
+import PrivateRoute from './PrivateRoute/PrivateRoute';
 
 function App() {
 
@@ -15,7 +19,7 @@ function App() {
       children:[
         {
           path:'/',
-          loader: ()=> fetch('http://localhost:5000/admin/categories'),
+          loader: ()=> fetch('https://boilagbe-com-server.vercel.app/admin/categories'),
           element:<Home></Home>
         },
         {
@@ -33,7 +37,21 @@ function App() {
 
           element:<Login></Login>
         },
+        {
+          path:'category/:id',
+          element:<PrivateRoute><CategorisedProduct></CategorisedProduct></PrivateRoute>
+        }
         
+      ]
+    },
+    {
+      path:'/dashboard',
+      element:<DashBoardLayout></DashBoardLayout>,
+      children:[
+        {
+          path:'/dashboard',
+          element:<Dashboard></Dashboard>
+        }
       ]
     }
   ])

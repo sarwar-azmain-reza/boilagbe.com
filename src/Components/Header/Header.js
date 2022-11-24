@@ -29,7 +29,7 @@ const Header = () => {
                             user?.uid ?
                                 <>
                                     <li><Link to='/dashboard'>Dashboard</Link></li>
-                                    <li><Link to='/addservice' >Add Service</Link></li>
+
                                     <li><button onClick={handleLogout}>Logout</button></li>
                                 </>
                                 :
@@ -54,7 +54,7 @@ const Header = () => {
                         user?.uid ?
                             <>
                                 <li><Link to='/dashboard' className={`${location.pathname === '/dashboard' ? 'border-b-2' : ''}`}>Dashboard</Link></li>
-                                <li><Link to='/addservice' className={`${location.pathname === '/addservice' ? 'border-b-2' : ''}`}>Add Service</Link></li>
+
                                 <li><button onClick={handleLogout}>Logout</button></li>
                             </>
                             :
@@ -67,11 +67,16 @@ const Header = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                {
-                    user?.uid ? <p>{user?.displayName ? user?.displayName : user?.email}</p>
-                        :
-                        <></>
-                }
+                <div className='hidden lg:block'>
+                    {
+                        user?.uid ? <p>{user?.displayName ? user?.displayName : user?.email}</p>
+                            :
+                            <></>
+                    }
+                </div>
+                <label htmlFor="dashboard-drawer" tabIndex={2} className="btn btn-ghost lg:hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+            </label>
             </div>
         </div>
     );
