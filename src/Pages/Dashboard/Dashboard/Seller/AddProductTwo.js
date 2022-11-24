@@ -52,7 +52,8 @@ const AddProductTwo = () => {
                         image: imgData.data.url,
                         categoryId: form.categoryId.value,
                         description: form.description.value,
-                        sellerName: user?.displayName
+                        sellerName: user?.displayName,
+                        email: user?.email
                     }
 
                     fetch('https://boilagbe-com-server.vercel.app/products', {
