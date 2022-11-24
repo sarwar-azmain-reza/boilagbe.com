@@ -35,9 +35,27 @@ const Dashboard = () => {
             .then(data => {
                 if (data.deletedCount > 0) {
                     refetch();
-                    toast.success('Delted Successful.')
+                    toast.success('Deletion Successful.')
                 }
             })
+    }
+
+    const handleAdvertise = id => {
+
+        fetch(`https://boilagbe-com-server.vercel.app/products/${id}`, {
+            method: 'PUT',
+            headers: {
+                authorization: `bearer ${localStorage.getItem('boilagbeToken')}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.modifiedCount > 0) {
+                    refetch();
+                    toast.success('Advertised Successfully..')
+                }
+            })
+
     }
 
     return (
@@ -70,8 +88,11 @@ const Dashboard = () => {
                                                 <td>{product.productName}</td>
                                                 <td>{product.sellingPrice}</td>
                                                 <td className=''>{product?.status ? `${product?.status}` : 'Available'}</td>
-                                                <td>{product?.status !== 'Sold' && <button className='btn btn-sm btn-info'>Advertise</button>}</td>
-                                                <td><button onClick={()=>handleDelete(product._id)} className='btn btn-sm btn-error'>Delete</button></td>
+                                                <td>{product?.status !== 'Sold' && <button onClick={()=>handleAdvertise(product._id)} className={` text-white btn-sm ${product?.advertisement !== 'Advertised' ? 'btn btn-info' : 'disabled bg-slate-500 rounded-md cursor-not-allowed'} `}>{product?.advertisement ? `${product?.advertisement}` : 'Advertise'}</button>}</td>
+
+                                                <td><button onClick={() => handleDelete(product._id)} className='btn btn-sm btn-error'>Delete</button></td>
+
+
                                             </tr>)
                                         }
                                     </tbody>
