@@ -7,6 +7,8 @@ const Register = () => {
     const [error, setError] = useState('');
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
+
+
     const handleSignUp = event => {
         event.preventDefault();
         const form = event.target;
@@ -15,32 +17,25 @@ const Register = () => {
         const email = form.email.value;
         const password = form.password.value;
         setLoading(true);
-        console.log(name,accountType, email, password);
+        console.log(name, accountType, email, password);
         userSignUp(email, password)
             .then(result => {
                 const user = result.user;
                 setError('');
                 handleUpdateUserProfile(name);
-
-                setLoading(false);
-                const currentUser = {
-                    email: user.email
-                }
-                console.log(currentUser);
-                form.reset();
-                fetch('https://kids-camp-server.vercel.app/jwt', {
-                    method: 'POST',
-                    headers: {
-                        'content-type': 'application/json'
-                    },
-                    body: JSON.stringify(currentUser)
-                })
+                saveUser(name, email, accountType);
+                fetch(`http://localhost:5000/jwt?email=${email}`)
                     .then(res => res.json())
                     .then(data => {
-                        console.log(data);
-                        localStorage.setItem('KidsCampToken', data.token);
+                        if (data.accessToken) {
+                            localStorage.setItem('boilagbeToken', data.accessToken);
+                        }
+                        setLoading(false);
+                        console.log('After jwt call',user);
+                        form.reset();
                         navigate('/');
                     });
+
 
             })
             .catch(error => {
@@ -63,6 +58,23 @@ const Register = () => {
                 console.error(error);
             })
     }
+
+
+    const saveUser = (name, email, accountType) => {
+        const user = { name, email, accountType };
+        fetch('http://localhost:5000/admin/users', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log('After saving',data)
+            })
+    }
+
     return (
         <div className={`py-10`}>
             <h1 className='text-center text-4xl font-bold '>Register To BoiLagbe</h1>
