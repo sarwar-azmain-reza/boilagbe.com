@@ -8,7 +8,7 @@ const useRole = (email) => {
             fetch(`https://boilagbe-com-server.vercel.app/admin/users/${email}`)
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data);
+                    // console.log(data);
                     setRole(data.accountType);
                     setLoading(false);
                 })

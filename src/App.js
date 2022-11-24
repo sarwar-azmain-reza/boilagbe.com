@@ -4,14 +4,13 @@ import DashBoardLayout from './Layout/DashBoardLayout';
 import Main from './Layout/Main';
 import CategorisedProduct from './Pages/CategorisedProduct/CategorisedProduct';
 import Dashboard from './Pages/Dashboard/Dashboard/Dashboard';
-import AddProduct from './Pages/Dashboard/Dashboard/Seller/AddProduct';
 import AddProductTwo from './Pages/Dashboard/Dashboard/Seller/AddProductTwo';
 import Home from './Pages/Home/Home';
 import Login from './Pages/Login/Login';
 import Register from './Pages/Register/Register';
 import Weblogs from './Pages/Weblogs/Weblogs';
 import PrivateRoute from './PrivateRoute/PrivateRoute';
-
+import { Toaster } from 'react-hot-toast';
 function App() {
 
   const router = createBrowserRouter([
@@ -64,6 +63,7 @@ function App() {
   return (
     <div className="">
       <RouterProvider router={router}></RouterProvider>
+      <Toaster></Toaster>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { AuthContext } from '../../../../Context/UserContext';
 import Loader from '../../../../Components/Loading/Loader';
@@ -9,7 +9,7 @@ const AddProduct = () => {
     // console.log(user);
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [loading, setLoading] = useState(false);
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const imageHostKey = process.env.REACT_APP_imgbb_key;
 
     const { data: categories, isLoading } = useQuery({

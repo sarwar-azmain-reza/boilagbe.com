@@ -3,9 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { AuthContext } from '../../../../Context/UserContext';
 import Loader from '../../../../Components/Loading/Loader';
+import toast from 'react-hot-toast';
+
 const AddProductTwo = () => {
     const { user } = useContext(AuthContext);
-    // console.log(user);
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const [selectedFile, setSelectedFile] = useState();
@@ -20,8 +21,8 @@ const AddProductTwo = () => {
         }
     })
     const changeHandler = (event) => {
-		setSelectedFile(event.target.files[0]);
-	};
+        setSelectedFile(event.target.files[0]);
+    };
     const handleAddProduct = event => {
         event.preventDefault();
         const form = event.target;
@@ -37,7 +38,7 @@ const AddProductTwo = () => {
         })
             .then(res => res.json())
             .then(imgData => {
-                setLoading(false)
+
                 if (imgData.success) {
                     console.log(imgData.data.url);
                     const product = {
@@ -52,8 +53,25 @@ const AddProductTwo = () => {
                         categoryId: form.categoryId.value,
                         description: form.description.value,
                         sellerName: user?.displayName
-
                     }
+
+                    fetch('https://boilagbe-com-server.vercel.app/products', {
+                        method: 'POST',
+                        headers: {
+                            'content-type': 'application/json',
+                            authorization: `bearer ${localStorage.getItem('boilagbeToken')}`
+                        },
+                        body: JSON.stringify(product)
+                    })
+                        .then(res => res.json())
+                        .then(result => {
+                            console.log(result);
+                            if (result.acknowledged) {
+                                setLoading(false);
+                                toast.success('Product is added successfully');
+                                navigate('/dashboard')
+                            }
+                        })
                     console.log(product);
                 }
             })
@@ -75,23 +93,23 @@ const AddProductTwo = () => {
                             </label>
                             <input type="text"
                                 name='productName' placeholder="Product Name" className="input input-bordered focus:outline-none" required />
-                            
+
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Selling Price</span>
                             </label>
                             <input type="number"
-                                 name='sellingPrice' placeholder="Selling Price" className="input input-bordered focus:outline-none" required />
-                          
+                                name='sellingPrice' placeholder="Selling Price" className="input input-bordered focus:outline-none" required />
+
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Original Price</span>
                             </label>
                             <input type="number"
-                             name='originalPrice' placeholder="Original Price" className="input input-bordered focus:outline-none" required />
-                        
+                                name='originalPrice' placeholder="Original Price" className="input input-bordered focus:outline-none" required />
+
                         </div>
                     </div>
                     <div className='grid grid-cols-3 gap-4'>
@@ -102,7 +120,7 @@ const AddProductTwo = () => {
                             </label>
                             <input type="number"
                                 name='yearOfUse' placeholder="Year of Use" className="input input-bordered focus:outline-none" required />
-                           
+
                         </div>
                         <div className="form-control">
                             <label className="label">
@@ -110,7 +128,7 @@ const AddProductTwo = () => {
                             </label>
                             <input type="text"
                                 name='mobileNo' placeholder="Mobile No" className="input input-bordered focus:outline-none" required />
-                        
+
                         </div>
                         <div className="form-control">
                             <label className="label">
@@ -118,7 +136,7 @@ const AddProductTwo = () => {
                             </label>
                             <input type="text"
                                 name='location' placeholder="Location" className="input input-bordered focus:outline-none" required />
-                         
+
                         </div>
                     </div>
 
@@ -130,7 +148,7 @@ const AddProductTwo = () => {
                                 <span className="label-text">Condition</span>
                             </label>
                             <select name='condition'
-                                
+
                                 className="select select-bordered focus:outline-none w-full ">
                                 <option value='Fair'>Fair</option>
                                 <option value='Good'>Good</option>
@@ -142,14 +160,14 @@ const AddProductTwo = () => {
                                 <span className="label-text">Product Image</span>
                             </label>
                             <input type="file" name='image' onChange={changeHandler} className="file-input  file-input-bordered" required />
-                           
+
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Product Category</span>
                             </label>
                             <select name='categoryId'
-                              
+
                                 className="select select-bordered focus:outline-none w-full ">
                                 {
                                     categories.map(category => <option
@@ -166,7 +184,7 @@ const AddProductTwo = () => {
                                 <span className="label-text">Product Description</span>
                             </label>
                             <textarea className="textarea textarea-info focus:outline-none w-full" placeholder="Description" name='description' required></textarea>
-                          
+
                         </div>
                         <div className="form-control">
                             <label className="label">
