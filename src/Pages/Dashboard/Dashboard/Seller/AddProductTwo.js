@@ -1,15 +1,14 @@
 import React, { useContext, useState } from 'react';
-import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { AuthContext } from '../../../../Context/UserContext';
 import Loader from '../../../../Components/Loading/Loader';
-const AddProduct = () => {
+const AddProductTwo = () => {
     const { user } = useContext(AuthContext);
     // console.log(user);
-    const { register, handleSubmit, formState: { errors } } = useForm();
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
+    const [selectedFile, setSelectedFile] = useState();
     const imageHostKey = process.env.REACT_APP_imgbb_key;
 
     const { data: categories, isLoading } = useQuery({
@@ -20,12 +19,17 @@ const AddProduct = () => {
             return data;
         }
     })
-    const handleAddProduct = data => {
-        const image = data.image[0];
+    const changeHandler = (event) => {
+		setSelectedFile(event.target.files[0]);
+	};
+    const handleAddProduct = event => {
+        event.preventDefault();
+        const form = event.target;
         const formData = new FormData();
-        formData.append('image', image);
+        formData.append('image', selectedFile);
         console.log('adding product')
         setLoading(true);
+        // upload to imgbb -> eto slow ken bhai
         const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`
         fetch(url, {
             method: 'POST',
@@ -37,16 +41,16 @@ const AddProduct = () => {
                 if (imgData.success) {
                     console.log(imgData.data.url);
                     const product = {
-                        productName: data.productName,
-                        sellingPrice: data.sellingPrice,
-                        originalPrice: data.originalPrice,
-                        yearOfUse: data.yearOfUse,
-                        mobileNo: data.mobileNo,
-                        location: data.location,
-                        condition: data.condition,
+                        productName: form.productName.value,
+                        sellingPrice: form.sellingPrice.value,
+                        originalPrice: form.originalPrice.value,
+                        yearOfUse: form.yearOfUse.value,
+                        mobileNo: form.mobileNo.value,
+                        location: form.location.value,
+                        condition: form.condition.value,
                         image: imgData.data.url,
-                        categoryId: data.categoryId,
-                        description: data.description,
+                        categoryId: form.categoryId.value,
+                        description: form.description.value,
                         sellerName: user?.displayName
 
                     }
@@ -63,17 +67,14 @@ const AddProduct = () => {
         <div className='conatiner mx-auto px-5 py-10 border'>
             <h1 className='text-center font-semibold text-3xl'>Add A Product</h1><hr />
             <div className='mt-10'>
-                <form className="card-body" onSubmit={handleSubmit(handleAddProduct)}>
+                <form className="card-body" onSubmit={handleAddProduct}>
                     <div className='grid grid-cols-3 gap-4'>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Product Name</span>
                             </label>
                             <input type="text"
-                                {...register("productName", {
-                                    required: "Product Name is Required",
-                                })} name='productName' placeholder="Product Name" className="input input-bordered focus:outline-none" required />
-                            {errors.productName && <p className='text-red-500'>{errors.productName.message}</p>}
+                                name='productName' placeholder="Product Name" className="input input-bordered focus:outline-none" required />
                             
                         </div>
                         <div className="form-control">
@@ -81,20 +82,16 @@ const AddProduct = () => {
                                 <span className="label-text">Selling Price</span>
                             </label>
                             <input type="number"
-                                {...register("sellingPrice", {
-                                    required: "Product selling price is Required"
-                                })} name='sellingPrice' placeholder="Selling Price" className="input input-bordered focus:outline-none" required />
-                            {errors.sellingPrice && <p className='text-red-500'>{errors.sellingPrice.message}</p>}
+                                 name='sellingPrice' placeholder="Selling Price" className="input input-bordered focus:outline-none" required />
+                          
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Original Price</span>
                             </label>
                             <input type="number"
-                                {...register("originalPrice", {
-                                    required: "Original price is Required"
-                                })} name='originalPrice' placeholder="Original Price" className="input input-bordered focus:outline-none" required />
-                            {errors.originalPrice && <p className='text-red-500'>{errors.originalPrice.message}</p>}
+                             name='originalPrice' placeholder="Original Price" className="input input-bordered focus:outline-none" required />
+                        
                         </div>
                     </div>
                     <div className='grid grid-cols-3 gap-4'>
@@ -104,31 +101,24 @@ const AddProduct = () => {
                                 <span className="label-text">Year of Use</span>
                             </label>
                             <input type="number"
-                                {...register("yearOfUse", {
-                                    required: "Year of use is Required"
-                                })} name='yearOfUse' placeholder="Year of Use" className="input input-bordered focus:outline-none" required />
-                            {errors.yearOfUse && <p className='text-red-500'>{errors.yearOfUse.message}</p>}
+                                name='yearOfUse' placeholder="Year of Use" className="input input-bordered focus:outline-none" required />
+                           
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Mobile No</span>
                             </label>
                             <input type="text"
-                                {...register("mobileNo", {
-                                    required: "Mobile No is Required"
-                                })} name='mobileNo' placeholder="Mobile No" className="input input-bordered focus:outline-none" required />
-                            {errors.mobileNo && <p className='text-red-500'>{errors.mobileNo.message}</p>}
+                                name='mobileNo' placeholder="Mobile No" className="input input-bordered focus:outline-none" required />
+                        
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Location</span>
                             </label>
                             <input type="text"
-                                {...register("location", {
-                                    required: "Location is Required",
-                                    pattern: /^[A-Za-z]+$/i
-                                })} name='location' placeholder="Location" className="input input-bordered focus:outline-none" required />
-                            {errors.location && <p className='text-red-500'>{errors.location.message}</p>}
+                                name='location' placeholder="Location" className="input input-bordered focus:outline-none" required />
+                         
                         </div>
                     </div>
 
@@ -140,7 +130,7 @@ const AddProduct = () => {
                                 <span className="label-text">Condition</span>
                             </label>
                             <select name='condition'
-                                {...register("condition")}
+                                
                                 className="select select-bordered focus:outline-none w-full ">
                                 <option value='Fair'>Fair</option>
                                 <option value='Good'>Good</option>
@@ -151,17 +141,15 @@ const AddProduct = () => {
                             <label className="label">
                                 <span className="label-text">Product Image</span>
                             </label>
-                            <input type="file" {...register("image", {
-                                required: "Product image is Required"
-                            })} name='image' className="file-input  file-input-bordered" required />
-                            {errors.img && <p className='text-red-500'>{errors.img.message}</p>}
+                            <input type="file" name='image' onChange={changeHandler} className="file-input  file-input-bordered" required />
+                           
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Product Category</span>
                             </label>
                             <select name='categoryId'
-                                {...register("categoryId")}
+                              
                                 className="select select-bordered focus:outline-none w-full ">
                                 {
                                     categories.map(category => <option
@@ -177,11 +165,8 @@ const AddProduct = () => {
                             <label className="label">
                                 <span className="label-text">Product Description</span>
                             </label>
-                            <textarea {...register("description", {
-                                required: "Product description is Required",
-                                pattern: /^[A-Za-z]+$/i
-                            })} className="textarea textarea-info focus:outline-none w-full" placeholder="Description" name='description' required></textarea>
-                            {errors.description && <p className='text-red-500'>{errors.description.message}</p>}
+                            <textarea className="textarea textarea-info focus:outline-none w-full" placeholder="Description" name='description' required></textarea>
+                          
                         </div>
                         <div className="form-control">
                             <label className="label">
@@ -200,4 +185,4 @@ const AddProduct = () => {
     );
 };
 
-export default AddProduct;
+export default AddProductTwo;

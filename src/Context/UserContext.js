@@ -12,7 +12,7 @@ const UserContext = ({children}) => {
 
     const googleProvider = new GoogleAuthProvider();
 
-    const [user,setUser] = useState({displayName : 'Neo'});
+    const [user,setUser] = useState(null);
     const [loading,setLoading] = useState(true);
     const userSignUp = (email,password) => {
         setLoading(true);
