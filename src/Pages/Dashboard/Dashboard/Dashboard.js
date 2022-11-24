@@ -9,7 +9,7 @@ const Dashboard = () => {
     const { user } = useContext(AuthContext);
     const [role, isLoading] = useRole(user?.email);
 
-    const url = `http://localhost:5000/products?email=${user?.email}`;
+    const url = `https://boilagbe-com-server.vercel.app/products?email=${user?.email}`;
 
     const { data: myproducts = [], refetch } = useQuery({
         queryKey: ['myproducts', user?.email],
@@ -25,7 +25,7 @@ const Dashboard = () => {
     })
 
     const handleStatus = id => {
-        fetch(`http://localhost:5000/products/${id}`, {
+        fetch(`https://boilagbe-com-server.vercel.app/products/${id}`, {
             method: 'PUT',
             headers: {
                 authorization: `bearer ${localStorage.getItem('boilagbeToken')}`
@@ -62,18 +62,6 @@ const Dashboard = () => {
                                             <th>Advertising</th>
                                         </tr>
                                     </thead>
-                                    {/* <tbody>
-                                        {
-                                            users.map((user, i) => <tr key={user._id}>
-                                                <th>{i + 1}</th>
-                                                <td>{user.name}</td>
-                                                <td>{user.email}</td>
-                                                <td>{user?.role !== 'admin' && <button onClick={() => handleMakeAdmin(user._id)} className='btn btn-xs btn-primary'>Make Admin</button>}</td>
-                                                <td><button className='btn btn-xs btn-danger'>Delete</button></td>
-                                            </tr>)
-                                        }
-
-                                    </tbody> */}
                                     <tbody>
                                         {
                                             myproducts.map((product, i) => <tr key={product._id}>
