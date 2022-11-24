@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 const useRole = (email) => {
     const [role,setRole] = useState('');
-    const [loading,setLoading] = useState(true);
+    const [isLoading,setLoading] = useState(true);
     useEffect(() => {
         if (email) {
             fetch(`https://boilagbe-com-server.vercel.app/admin/users/${email}`)
@@ -14,7 +14,7 @@ const useRole = (email) => {
                 })
         }
     }, [email])
-    return [role, loading]
+    return [role, isLoading]
 };
 
 export default useRole;

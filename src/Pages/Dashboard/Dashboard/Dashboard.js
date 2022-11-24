@@ -5,11 +5,11 @@ import useRole from '../../../Hooks/useRole';
 
 const Dashboard = () => {
     const { user } = useContext(AuthContext);
-    const [role, loading] = useRole(user?.email);
+    const [role, isLoading] = useRole(user?.email);
     return (
         <>
             {
-                loading ?
+                isLoading ?
                     <Loader></Loader>
                     :
 

@@ -11,6 +11,7 @@ import Register from './Pages/Register/Register';
 import Weblogs from './Pages/Weblogs/Weblogs';
 import PrivateRoute from './PrivateRoute/PrivateRoute';
 import { Toaster } from 'react-hot-toast';
+import SellerRout from './PrivateRoute/SellerRout';
 function App() {
 
   const router = createBrowserRouter([
@@ -55,7 +56,7 @@ function App() {
         },
         {
           path:'/dashboard/addproduct',
-          element:<AddProductTwo></AddProductTwo>
+          element:<SellerRout><AddProductTwo></AddProductTwo></SellerRout>
         }
       ]
     }
