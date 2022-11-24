@@ -24,18 +24,18 @@ const Dashboard = () => {
         }
     })
 
-    const handleStatus = id => {
+    const handleDelete = id => {
         fetch(`https://boilagbe-com-server.vercel.app/products/${id}`, {
-            method: 'PUT',
+            method: 'DELETE',
             headers: {
                 authorization: `bearer ${localStorage.getItem('boilagbeToken')}`
             }
         })
             .then(res => res.json())
             .then(data => {
-                if (data.modifiedCount > 0) {
-                    toast.success('Updated Status Successful.')
+                if (data.deletedCount > 0) {
                     refetch();
+                    toast.success('Delted Successful.')
                 }
             })
     }
@@ -60,6 +60,7 @@ const Dashboard = () => {
                                             <th>Price</th>
                                             <th>Status</th>
                                             <th>Advertising</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -68,8 +69,9 @@ const Dashboard = () => {
                                                 <th>{i + 1}</th>
                                                 <td>{product.productName}</td>
                                                 <td>{product.sellingPrice}</td>
-                                                <td><button onClick={() => handleStatus(product._id)} className={` text-white btn-sm ${product?.status !== 'Sold' ? 'btn btn-info' : 'disabled bg-slate-500 rounded-md cursor-not-allowed'} `}>{product?.status ? `${product?.status}` : 'Available'}</button></td>
-                                                <td>{product?.status !== 'Sold' && <button className='btn btn-sm btn-error disabled'>Advertise</button>}</td>
+                                                <td className=''>{product?.status ? `${product?.status}` : 'Available'}</td>
+                                                <td>{product?.status !== 'Sold' && <button className='btn btn-sm btn-info'>Advertise</button>}</td>
+                                                <td><button onClick={()=>handleDelete(product._id)} className='btn btn-sm btn-error'>Delete</button></td>
                                             </tr>)
                                         }
                                     </tbody>
