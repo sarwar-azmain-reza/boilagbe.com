@@ -1,10 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
 import { BookOpenIcon, ShieldCheckIcon, CheckCircleIcon } from '@heroicons/react/24/solid'
 import useTitle from '../../Hooks/useTitle';
+import axios from 'axios';
 const Home = () => {
     const categories = useLoaderData();
     useTitle('BoiLagbe');
+    // const [advertisedProducts, setAdvertisedProducts] = useState([]);
+
+    // useEffect(() => {
+    //     axios.get('/user?ID=12345')
+    //         .then(function (response) {
+    //             // handle success
+    //             console.log(response);
+    //         })
+    //         .catch(function (error) {
+    //             // handle error
+    //             console.log(error);
+    //         })
+    // }, [])
+
     return (
         <>
             <div className="hero h-96" style={{ backgroundImage: `url("https://149349728.v2.pressablecdn.com/wp-content/uploads/2019/11/jaredd-craig-HH4WBGNyltc-unsplash.jpg")` }}>
@@ -37,11 +52,11 @@ const Home = () => {
                     <h1 className='text-3xl font-semibold text-center'>Why Us?</h1><hr />
                     <div className='mt-10'>
                         <div className="flex flex-col lg:flex-row w-full">
-                            <div className="grid  py-6 flex-grow card bg-base-300 rounded-md place-items-center"><BookOpenIcon className='h-7 text-gray-600'/>Various Categories Of Books Are Available</div>
+                            <div className="grid  py-6 flex-grow card bg-base-300 rounded-md place-items-center"><BookOpenIcon className='h-7 text-gray-600' />Various Categories Of Books Are Available</div>
                             <div className="divider lg:divider-horizontal">AND</div>
-                            <div className="grid  py-6 flex-grow card bg-base-300 rounded-md place-items-center"><ShieldCheckIcon className='h-7 text-gray-600'/>Authenticity Of Books Are Checked</div>
+                            <div className="grid  py-6 flex-grow card bg-base-300 rounded-md place-items-center"><ShieldCheckIcon className='h-7 text-gray-600' />Authenticity Of Books Are Checked</div>
                             <div className="divider lg:divider-horizontal">AND</div>
-                            <div className="grid  py-6 flex-grow card bg-base-300 rounded-md place-items-center"><CheckCircleIcon className='h-7 text-gray-600'/>Sellers Are varified To Prevent Fraud</div>
+                            <div className="grid  py-6 flex-grow card bg-base-300 rounded-md place-items-center"><CheckCircleIcon className='h-7 text-gray-600' />Sellers Are varified To Prevent Fraud</div>
                         </div>
                     </div>
                 </div>

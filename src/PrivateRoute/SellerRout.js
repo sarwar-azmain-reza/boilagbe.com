@@ -9,7 +9,7 @@ const SellerRout = ({ children }) => {
     const [role, isLoading] = useRole(user?.email);
     const location = useLocation();
     // console.log(role);
-    if (loading || isLoading) {
+    if (isLoading) {
         return <Loader ></Loader>
     }
 

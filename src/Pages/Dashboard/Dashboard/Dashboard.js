@@ -1,108 +1,122 @@
-import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
-import toast from 'react-hot-toast';
 import Loader from '../../../Components/Loading/Loader';
 import { AuthContext } from '../../../Context/UserContext';
 import useRole from '../../../Hooks/useRole';
+import AdminDashboard from './Admin/AdminDashboard';
+import BuyerDashboard from './Buyer/BuyerDashboard';
+import SellerDashboard from './Seller/SellerDashboard';
 
 const Dashboard = () => {
     const { user } = useContext(AuthContext);
     const [role, isLoading] = useRole(user?.email);
 
-    const url = `https://boilagbe-com-server.vercel.app/products?email=${user?.email}`;
-
-    const { data: myproducts = [], refetch } = useQuery({
-        queryKey: ['myproducts', user?.email],
-        queryFn: async () => {
-            const res = await fetch(url, {
-                headers: {
-                    authorization: `bearer ${localStorage.getItem('boilagbeToken')}`
-                }
-            });
-            const data = await res.json();
-            return data;
-        }
-    })
-
-    const handleDelete = id => {
-        fetch(`https://boilagbe-com-server.vercel.app/products/${id}`, {
-            method: 'DELETE',
-            headers: {
-                authorization: `bearer ${localStorage.getItem('boilagbeToken')}`
-            }
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data.deletedCount > 0) {
-                    refetch();
-                    toast.success('Deletion Successful.')
-                }
-            })
+    if(isLoading){
+        return <Loader></Loader>
+    }
+    if(role === 'Seller'){
+        return <SellerDashboard></SellerDashboard>
+    }
+    else if(role === 'Admin'){
+        return <AdminDashboard></AdminDashboard>
+    }
+    else if(role ==='Buyer'){
+        return <BuyerDashboard></BuyerDashboard>
     }
 
-    const handleAdvertise = id => {
+    // const url = `https://boilagbe-com-server.vercel.app/products?email=${user?.email}`;
 
-        fetch(`https://boilagbe-com-server.vercel.app/products/${id}`, {
-            method: 'PUT',
-            headers: {
-                authorization: `bearer ${localStorage.getItem('boilagbeToken')}`
-            }
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data.modifiedCount > 0) {
-                    refetch();
-                    toast.success('Advertised Successfully..')
-                }
-            })
+    // const { data: myproducts = [], refetch } = useQuery({
+    //     queryKey: ['myproducts', user?.email],
+    //     queryFn: async () => {
+    //         const res = await fetch(url, {
+    //             headers: {
+    //                 authorization: `bearer ${localStorage.getItem('boilagbeToken')}`
+    //             }
+    //         });
+    //         const data = await res.json();
+    //         return data;
+    //     }
+    // })
 
-    }
+    // const handleDelete = id => {
+    //     fetch(`https://boilagbe-com-server.vercel.app/products/${id}`, {
+    //         method: 'DELETE',
+    //         headers: {
+    //             authorization: `bearer ${localStorage.getItem('boilagbeToken')}`
+    //         }
+    //     })
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             if (data.deletedCount > 0) {
+    //                 refetch();
+    //                 toast.success('Deletion Successful.')
+    //             }
+    //         })
+    // }
 
-    return (
-        <div className='border container mx-auto px-5 py-10'>
-            {
-                isLoading ?
-                    <Loader></Loader>
-                    :
+    // const handleAdvertise = id => {
 
-                    <div className=''>
-                        <h1 className='text-2xl font-semibold'>All Products of {role} {user?.displayName}</h1><hr />
-                        <div className='mt-10'>
-                            <div className="overflow-x-auto">
-                                <table className="table w-full">
+    //     fetch(`https://boilagbe-com-server.vercel.app/products/${id}`, {
+    //         method: 'PUT',
+    //         headers: {
+    //             authorization: `bearer ${localStorage.getItem('boilagbeToken')}`
+    //         }
+    //     })
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             if (data.modifiedCount > 0) {
+    //                 refetch();
+    //                 toast.success('Advertised Successfully..')
+    //             }
+    //         })
 
-                                    <thead>
-                                        <tr>
-                                            <th></th>
-                                            <th>Product</th>
-                                            <th>Price</th>
-                                            <th>Status</th>
-                                            <th>Advertising</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {
-                                            myproducts.map((product, i) => <tr key={product._id}>
-                                                <th>{i + 1}</th>
-                                                <td>{product.productName}</td>
-                                                <td>{product.sellingPrice}</td>
-                                                <td className=''>{product?.status ? `${product?.status}` : 'Available'}</td>
-                                                <td>{product?.status !== 'Sold' && <button onClick={()=>handleAdvertise(product._id)} className={` text-white btn-sm ${product?.advertisement !== 'Advertised' ? 'btn btn-info' : 'disabled bg-slate-500 rounded-md cursor-not-allowed'} `}>{product?.advertisement ? `${product?.advertisement}` : 'Advertise'}</button>}</td>
+    // }
 
-                                                <td><button onClick={() => handleDelete(product._id)} className='btn btn-sm btn-error'>Delete</button></td>
+    // return (
+    //     <div className='border container mx-auto px-5 py-10'>
+    //         {
+    //             isLoading ?
+    //                 <Loader></Loader>
+    //                 :
+
+    //                 <div className=''>
+    //                     <h1 className='text-2xl font-semibold'>All Products of {role} {user?.displayName}</h1><hr />
+    //                     <div className='mt-10'>
+    //                         <div className="overflow-x-auto">
+    //                             <table className="table w-full">
+
+    //                                 <thead>
+    //                                     <tr>
+    //                                         <th></th>
+    //                                         <th>Product</th>
+    //                                         <th>Price</th>
+    //                                         <th>Status</th>
+    //                                         <th>Advertising</th>
+    //                                         <th>Action</th>
+    //                                     </tr>
+    //                                 </thead>
+    //                                 <tbody>
+    //                                     {
+    //                                         myproducts.map((product, i) => <tr key={product._id}>
+    //                                             <th>{i + 1}</th>
+    //                                             <td>{product.productName}</td>
+    //                                             <td>{product.sellingPrice}</td>
+    //                                             <td className=''>{product?.status ? `${product?.status}` : 'Available'}</td>
+    //                                             <td>{product?.status !== 'Sold' && <button onClick={()=>handleAdvertise(product._id)} className={` text-white btn-sm ${product?.advertisement !== 'Advertised' ? 'btn btn-info' : 'disabled bg-slate-500 rounded-md cursor-not-allowed'} `}>{product?.advertisement ? `${product?.advertisement}` : 'Advertise'}</button>}</td>
+
+    //                                             <td><button onClick={() => handleDelete(product._id)} className='btn btn-sm btn-error'>Delete</button></td>
 
 
-                                            </tr>)
-                                        }
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-            }
-        </div>
-    );
+    //                                         </tr>)
+    //                                     }
+    //                                 </tbody>
+    //                             </table>
+    //                         </div>
+    //                     </div>
+    //                 </div>
+    //         }
+    //     </div>
+    // );
 };
 
 export default Dashboard;

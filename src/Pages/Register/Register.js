@@ -24,17 +24,7 @@ const Register = () => {
                 setError('');
                 handleUpdateUserProfile(name);
                 saveUser(name, email, accountType);
-                fetch(`https://boilagbe-com-server.vercel.app/jwt?email=${email}`)
-                    .then(res => res.json())
-                    .then(data => {
-                        if (data.accessToken) {
-                            localStorage.setItem('boilagbeToken', data.accessToken);
-                        }
-                        setLoading(false);
-                        console.log('After jwt call',user);
-                        form.reset();
-                        navigate('/');
-                    });
+                
 
 
             })
@@ -72,6 +62,17 @@ const Register = () => {
             .then(res => res.json())
             .then(data => {
                 console.log('After saving',data)
+                fetch(`https://boilagbe-com-server.vercel.app/jwt?email=${email}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.accessToken) {
+                            localStorage.setItem('boilagbeToken', data.accessToken);
+                        }
+                        setLoading(false);
+                        console.log('After jwt call',user);
+                        // form.reset();
+                        navigate('/');
+                    });
             })
     }
 
