@@ -16,7 +16,7 @@ const CategorisedProduct = () => {
                 }
             </div>
             {
-                productInfo && <BookingModal productInfo={productInfo} user={user}></BookingModal>
+                productInfo && <BookingModal productInfo={productInfo} setProductInfo={setProductInfo} user={user}></BookingModal>
             }
         </div>
     );
