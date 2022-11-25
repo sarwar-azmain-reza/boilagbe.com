@@ -10,7 +10,7 @@ const Home = () => {
     const [advertisedProducts, setAdvertisedProducts] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:5000/advertised')
+        axios.get('https://boilagbe-com-server.vercel.app/advertised')
             .then(response => {
                 console.log(response);
                 setAdvertisedProducts(response.data);

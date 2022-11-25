@@ -5,7 +5,7 @@ const AdvertisedProducts = (props) => {
     return (
         <div className='mt-10 container mx-auto'>
             <h1 className='text-3xl font-semibold text-center'>Advertised Books</h1><hr />
-            <div className='mt-10 grid grid-cols-3 gap-4'>
+            <div className='mt-10 grid md:grid-cols-3 gap-4'>
                 {
                     advertisedProducts.map(product => <div key={product._id}>
                         <div className="card card-compact bg-slate-300 shadow-xl">

@@ -20,7 +20,7 @@ const Register = () => {
         console.log(name, accountType, email, password);
         userSignUp(email, password)
             .then(result => {
-                const user = result.user;
+                // const user = result.user;
                 setError('');
                 handleUpdateUserProfile(name);
                 saveUser(name, email, accountType);

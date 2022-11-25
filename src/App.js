@@ -41,6 +41,7 @@ function App() {
         },
         {
           path:'category/:id',
+          loader:({params})=> fetch(`https://boilagbe-com-server.vercel.app/products/${params.id}`),
           element:<PrivateRoute><CategorisedProduct></CategorisedProduct></PrivateRoute>
         }
         
