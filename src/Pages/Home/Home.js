@@ -3,22 +3,22 @@ import { Link, useLoaderData } from 'react-router-dom';
 import { BookOpenIcon, ShieldCheckIcon, CheckCircleIcon } from '@heroicons/react/24/solid'
 import useTitle from '../../Hooks/useTitle';
 import axios from 'axios';
+import AdvertisedProducts from './AdvertisedProducts';
 const Home = () => {
     const categories = useLoaderData();
     useTitle('BoiLagbe');
-    // const [advertisedProducts, setAdvertisedProducts] = useState([]);
+    const [advertisedProducts, setAdvertisedProducts] = useState([]);
 
-    // useEffect(() => {
-    //     axios.get('/user?ID=12345')
-    //         .then(function (response) {
-    //             // handle success
-    //             console.log(response);
-    //         })
-    //         .catch(function (error) {
-    //             // handle error
-    //             console.log(error);
-    //         })
-    // }, [])
+    useEffect(() => {
+        axios.get('http://localhost:5000/advertised')
+            .then(response => {
+                console.log(response);
+                setAdvertisedProducts(response.data);
+            })
+            .catch(error=> {
+                console.log(error);
+            })
+    }, [])
 
     return (
         <>
@@ -40,12 +40,12 @@ const Home = () => {
                 </div>
 
                 {/* Advertised items - need to have once or more items labaled as advertised */}
-                <div className='mt-10 container mx-auto'>
-                    <h1 className='text-3xl font-semibold text-center'>Advertised Products</h1><hr />
-                    <div>
-
-                    </div>
-                </div>
+                {
+                    advertisedProducts ? 
+                    <AdvertisedProducts advertisedProducts={advertisedProducts}></AdvertisedProducts>
+                    :
+                    <></>
+                }
 
                 {/* Why Boilagbe */}
                 <div className='mt-10 container mx-auto'>

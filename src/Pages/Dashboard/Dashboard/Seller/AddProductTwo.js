@@ -87,7 +87,7 @@ const AddProductTwo = () => {
             <h1 className='text-center font-semibold text-3xl'>Add A Product</h1><hr />
             <div className='mt-10'>
                 <form className="card-body" onSubmit={handleAddProduct}>
-                    <div className='grid grid-cols-3 gap-4'>
+                    <div className='grid lg:grid-cols-3 md:grid-cols-2 gap-4'>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Product Name</span>
@@ -112,8 +112,6 @@ const AddProductTwo = () => {
                                 name='originalPrice' placeholder="Original Price" className="input input-bordered focus:outline-none" required />
 
                         </div>
-                    </div>
-                    <div className='grid grid-cols-3 gap-4'>
 
                         <div className="form-control">
                             <label className="label">
@@ -139,10 +137,6 @@ const AddProductTwo = () => {
                                 name='location' placeholder="Location" className="input input-bordered focus:outline-none" required />
 
                         </div>
-                    </div>
-
-                    <div className='grid grid-cols-3 gap-4'>
-
 
                         <div className="form-control">
                             <label className="label">
@@ -160,7 +154,7 @@ const AddProductTwo = () => {
                             <label className="label">
                                 <span className="label-text">Product Image</span>
                             </label>
-                            <input type="file" name='image' onChange={changeHandler} className="file-input  file-input-bordered" required />
+                            <input type="file" name='image' onChange={changeHandler} className="file-input w-5/6 file-input-bordered md:w-full" required />
 
                         </div>
                         <div className="form-control">
@@ -169,7 +163,7 @@ const AddProductTwo = () => {
                             </label>
                             <select name='categoryId'
 
-                                className="select select-bordered focus:outline-none w-full ">
+                                className="select select-bordered focus:outline-none  md:w-full ">
                                 {
                                     categories.map(category => <option
                                         key={category._id}
@@ -179,7 +173,7 @@ const AddProductTwo = () => {
                             </select>
                         </div>
                     </div>
-                    <div className='grid grid-cols-2 gap-4'>
+                    <div className='grid md:grid-cols-2 gap-4'>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Product Description</span>
