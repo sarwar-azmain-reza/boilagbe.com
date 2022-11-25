@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import Loader from '../../../../Components/Loading/Loader';
 import { AuthContext } from '../../../../Context/UserContext';
 import useRole from '../../../../Hooks/useRole';
@@ -7,7 +8,7 @@ import useRole from '../../../../Hooks/useRole';
 const BuyerDashboard = () => {
     const { user } = useContext(AuthContext);
     const [role, isLoading] = useRole(user?.email);
-    const url = `http://localhost:5000/booking?email=${user?.email}`;
+    const url = `https://boilagbe-com-server.vercel.app/booking?email=${user?.email}`;
 
     const { data: mybookings = [], refetch } = useQuery({
         queryKey: ['myproducts', user?.email],
@@ -55,7 +56,7 @@ const BuyerDashboard = () => {
                                                 <td><img src={booking.image} alt="" className='h-8' /></td>
                                                 <td>{booking.productName}</td>
                                                 <td>{booking.sellingPrice}</td>
-                                                <td><button className='btn btn-sm btn-info text-white'>Payment</button></td>
+                                                <td><Link to={`/dashboard/payment/${booking._id}`} className='btn btn-sm btn-info text-white'>Pay</Link></td>
 
                                             </tr>)
                                         }

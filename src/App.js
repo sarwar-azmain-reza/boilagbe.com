@@ -12,6 +12,7 @@ import Weblogs from './Pages/Weblogs/Weblogs';
 import PrivateRoute from './PrivateRoute/PrivateRoute';
 import { Toaster } from 'react-hot-toast';
 import SellerRout from './PrivateRoute/SellerRout';
+import Payment from './Pages/Dashboard/Dashboard/Buyer/Payment';
 function App() {
 
   const router = createBrowserRouter([
@@ -58,6 +59,11 @@ function App() {
         {
           path:'/dashboard/addproduct',
           element:<SellerRout><AddProductTwo></AddProductTwo></SellerRout>
+        },
+        {
+          path:'/dashboard/payment/:id',
+          loader:({params})=> fetch(`https://boilagbe-com-server.vercel.app/booking/${params.id}`),
+          element:<Payment></Payment>
         }
       ]
     }
