@@ -56,7 +56,10 @@ const BuyerDashboard = () => {
                                                 <td><img src={booking.image} alt="" className='h-8' /></td>
                                                 <td>{booking.productName}</td>
                                                 <td>{booking.sellingPrice}</td>
-                                                <td><Link to={`/dashboard/payment/${booking._id}`} className='btn btn-sm btn-info text-white'>Pay</Link></td>
+                                                <td>
+                                                    {!booking?.paid && <Link to={`/dashboard/payment/${booking._id}`} className='btn btn-sm btn-info text-white'>Pay</Link> }
+                                                    {booking?.paid && <p className='text-green-500'>Paid</p>}
+                                                </td>
 
                                             </tr>)
                                         }
