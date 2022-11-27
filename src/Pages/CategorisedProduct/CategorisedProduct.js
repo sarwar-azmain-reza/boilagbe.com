@@ -3,8 +3,10 @@ import { useLoaderData } from 'react-router-dom';
 import BookingModal from '../../Components/BookingModal/BookingModal';
 import CategorisedProductCard from '../../Components/CategorisedProductCard/CategorisedProductCard';
 import { AuthContext } from '../../Context/UserContext';
+import useTitle from '../../Hooks/useTitle';
 
 const CategorisedProduct = () => {
+    useTitle('Products|BoiLagbe');
     const products = useLoaderData();
     const {user} = useContext(AuthContext);
     const [productInfo,setProductInfo] = useState(null);

@@ -4,7 +4,7 @@ const CheckOutForm = ({ bookingData }) => {
 
     const [cardError, setCardError] = useState('');
     const [success, setSuccess] = useState('');
-    const [processing, setProcessing] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [transactionId, setTransactionId] = useState('');
     const [clientSecret, setClientSecret] = useState("");
 
@@ -50,7 +50,7 @@ const CheckOutForm = ({ bookingData }) => {
             setCardError('');
         }
         setSuccess('');
-        setProcessing(true);
+        setLoading(true);
         const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(
             clientSecret,
             {
@@ -95,7 +95,7 @@ const CheckOutForm = ({ bookingData }) => {
                     }
                 })
         }
-        setProcessing(false);
+        setLoading(false);
 
     }
     return (
@@ -108,6 +108,7 @@ const CheckOutForm = ({ bookingData }) => {
                                 base: {
                                     fontSize: '16px',
                                     color: '#424770',
+                                    height:'20px',
                                     '::placeholder': {
                                         color: '#aab7c4',
                                     },
@@ -117,11 +118,11 @@ const CheckOutForm = ({ bookingData }) => {
                                 },
                             },
                         }}
-                        className='border' />
+                        className='border p-5 rounded-lg' />
                     <button
-                        className='btn btn-sm mt-4 btn-info'
+                        className={`btn btn-sm mt-4 btn-info text-white ${loading ? 'loading' : ''}`}
                         type="submit"
-                        disabled={!stripe || !clientSecret || processing}>
+                        disabled={!stripe || !clientSecret}>
                         Pay
                     </button>
                 </div>
@@ -130,7 +131,7 @@ const CheckOutForm = ({ bookingData }) => {
             {
                 success && <div>
                     <p className='text-green-500'>{success}</p>
-                    <p>Your transactionId: <span className='font-bold'>{transactionId}</span></p>
+                    <p>Your TransactionId: <span className='font-bold'>{transactionId}</span></p>
                 </div>
             }
         </>

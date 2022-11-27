@@ -4,8 +4,10 @@ import toast from 'react-hot-toast';
 import Loader from '../../../../Components/Loading/Loader';
 import { AuthContext } from '../../../../Context/UserContext';
 import useRole from '../../../../Hooks/useRole';
+import useTitle from '../../../../Hooks/useTitle';
 
 const SellerDashboard = () => {
+    useTitle('Dashboard');
     const { user } = useContext(AuthContext);
     const [role, isLoading] = useRole(user?.email);
 
@@ -65,7 +67,7 @@ const SellerDashboard = () => {
                     <Loader></Loader>
                     :
                     !myproducts.length ?
-                        <div>
+                        <div className='text-3xl font-semibold text-red-500'>
                             No products added!
                         </div>
                         :

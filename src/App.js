@@ -27,7 +27,7 @@ function App() {
         },
         {
           path:'/weblogs',
-
+          loader:()=> fetch('https://boilagbe-com-server.vercel.app/blogs'),
           element:<Weblogs></Weblogs>
         },
         {

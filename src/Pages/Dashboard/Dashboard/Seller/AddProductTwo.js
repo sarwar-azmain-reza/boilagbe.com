@@ -4,8 +4,10 @@ import { useQuery } from '@tanstack/react-query';
 import { AuthContext } from '../../../../Context/UserContext';
 import Loader from '../../../../Components/Loading/Loader';
 import toast from 'react-hot-toast';
+import useTitle from '../../../../Hooks/useTitle';
 
 const AddProductTwo = () => {
+    useTitle('Add Product|BoiLagbe');
     const { user } = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();

@@ -4,13 +4,15 @@ import { Link } from 'react-router-dom';
 import Loader from '../../../../Components/Loading/Loader';
 import { AuthContext } from '../../../../Context/UserContext';
 import useRole from '../../../../Hooks/useRole';
+import useTitle from '../../../../Hooks/useTitle';
 
 const BuyerDashboard = () => {
+    useTitle('Dashboard')
     const { user } = useContext(AuthContext);
     const [role, isLoading] = useRole(user?.email);
     const url = `https://boilagbe-com-server.vercel.app/booking?email=${user?.email}`;
 
-    const { data: mybookings = [], refetch } = useQuery({
+    const { data: mybookings = [], refetch, isLoading:loading } = useQuery({
         queryKey: ['myproducts', user?.email],
         queryFn: async () => {
             const res = await fetch(url, {
@@ -24,6 +26,9 @@ const BuyerDashboard = () => {
     })
     console.log(mybookings);
     if (isLoading) {
+        return <Loader></Loader>
+    }
+    if(loading){
         return <Loader></Loader>
     }
     return (
@@ -55,7 +60,7 @@ const BuyerDashboard = () => {
                                                 <th>{i + 1}</th>
                                                 <td><img src={booking.image} alt="" className='h-8' /></td>
                                                 <td>{booking.productName}</td>
-                                                <td>{booking.sellingPrice}</td>
+                                                <td>{booking.sellingPrice} BDT</td>
                                                 <td>
                                                     {!booking?.paid && <Link to={`/dashboard/payment/${booking._id}`} className='btn btn-sm btn-info text-white'>Pay</Link> }
                                                     {booking?.paid && <p className='text-green-500'>Paid</p>}

@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { Link, Outlet } from 'react-router-dom';
+import Footer from '../Components/Footer/Footer';
 import Header from '../Components/Header/Header';
 import { AuthContext } from '../Context/UserContext';
 import useRole from '../Hooks/useRole';
@@ -12,30 +13,30 @@ const DashBoardLayout = () => {
             <Header></Header>
             <div className="drawer drawer-mobile">
                 <input id="dashboard-drawer" type="checkbox" className="drawer-toggle" />
-                <div className="drawer-content">
+                <div className="drawer-content ">
                     <Outlet></Outlet>
                 </div>
-                <div className="drawer-side">
+                <div className="drawer-side ">
                     <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
-                    <ul className="menu p-4 w-80 text-base-content">
+                    <ul className="menu p-4 w-80  bg-slate-800 text-white">
 
                         {
                             role === 'Buyer' ?
                                 <>
-                                    <li><Link to="/dashboard">My Orders</Link></li>
+                                    <li className='border-b font-semibold'><Link to="/dashboard">My Orders</Link></li>
                                 </>
                                 :
                                 role === 'Seller' ?
                                     <>
-                                        <li><Link to="/dashboard">My Products</Link></li>
-                                        <li><Link to="/dashboard/addproduct">Add A Product</Link></li>
+                                        <li className='border-b font-semibold'><Link to="/dashboard">My Products</Link></li>
+                                        <li className='border-b font-semibold'><Link to="/dashboard/addproduct">Add A Product</Link></li>
                                     </>
                                     :
                                 role === 'Admin' ?
                                     <>
-                                        <li><Link to="/dashboard">All Sellers</Link></li>
-                                        <li><Link to="/dashboard">All Buyers</Link></li>
-                                        <li><Link to="/dashboard">Reported Items</Link></li>
+                                        <li className='border-b font-semibold'><Link to="/dashboard">All Sellers</Link></li>
+                                        <li className='border-b font-semibold'><Link to="/dashboard">All Buyers</Link></li>
+                                        <li className='border-b font-semibold'><Link to="/dashboard">Reported Items</Link></li>
                                     </>
                                     :
                                     <>
@@ -46,6 +47,7 @@ const DashBoardLayout = () => {
 
                 </div>
             </div>
+            <Footer></Footer>
         </div>
     );
 };

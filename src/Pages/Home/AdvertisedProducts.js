@@ -8,8 +8,8 @@ const AdvertisedProducts = (props) => {
             <div className='mt-10 grid md:grid-cols-3 gap-4'>
                 {
                     advertisedProducts.map(product => <div key={product._id}>
-                        <div className="card card-compact bg-slate-300 shadow-xl">
-                            <figure><img src={product.image} alt="Books" /></figure>
+                        <div className="card card-compact bg-slate-800 text-white shadow-xl">
+                            <figure><img src={product.image} alt="Books" className='h-60 w-full' /></figure>
                             <div className="card-body">
                                 <h2 className="card-title">{product.productName}</h2>
                                 <div className='flex font-semibold'>

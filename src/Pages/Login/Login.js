@@ -2,7 +2,9 @@ import React, { useContext, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/UserContext';
 import google from '../../Assets/google.png'
+import useTitle from '../../Hooks/useTitle';
 const Login = () => {
+    useTitle('Login|BoiLagbe');
     const { userSignIn, googleSignIn } = useContext(AuthContext);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);

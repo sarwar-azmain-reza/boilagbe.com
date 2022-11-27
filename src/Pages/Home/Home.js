@@ -35,7 +35,7 @@ const Home = () => {
             <div className='py-10 px-3'>
                 <div className='container mx-auto  grid md:grid-cols-3 gap-5'>
                     {
-                        categories.map(category => <Link to={`/category/${category._id}`} key={category._id} className='text-lg font-semibold bg-base-300 cursor-pointer border py-2 rounded text-center'>{category.category}</Link>)
+                        categories.map(category => <Link to={`/category/${category._id}`} key={category._id} className='text-lg font-semibold bg-slate-700 text-white cursor-pointer border py-2 rounded text-center'>{category.category}</Link>)
                     }
                 </div>
 
@@ -52,11 +52,11 @@ const Home = () => {
                     <h1 className='text-3xl font-semibold text-center'>Why Us?</h1><hr />
                     <div className='mt-10'>
                         <div className="flex flex-col lg:flex-row w-full">
-                            <div className="grid  py-6 flex-grow card bg-base-300 rounded-md place-items-center"><BookOpenIcon className='h-7 text-gray-600' />Various Categories Of Books Are Available</div>
+                            <div className="grid  py-6 flex-grow card bg-slate-800 rounded-md place-items-center text-white"><BookOpenIcon className='h-7 text-white' />Various Categories Of Books Are Available</div>
                             <div className="divider lg:divider-horizontal">AND</div>
-                            <div className="grid  py-6 flex-grow card bg-base-300 rounded-md place-items-center"><ShieldCheckIcon className='h-7 text-gray-600' />Authenticity Of Books Are Checked</div>
+                            <div className="grid  py-6 flex-grow card bg-slate-800 rounded-md place-items-center text-white"><ShieldCheckIcon className='h-7 text-white' />Authenticity Of Books Are Checked</div>
                             <div className="divider lg:divider-horizontal">AND</div>
-                            <div className="grid  py-6 flex-grow card bg-base-300 rounded-md place-items-center"><CheckCircleIcon className='h-7 text-gray-600' />Sellers Are varified To Prevent Fraud</div>
+                            <div className="grid  py-6 flex-grow card bg-slate-800 rounded-md place-items-center text-white"><CheckCircleIcon className='h-7 text-white' />Sellers Are varified To Prevent Fraud</div>
                         </div>
                     </div>
                 </div>

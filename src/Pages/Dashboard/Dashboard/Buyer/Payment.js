@@ -5,11 +5,13 @@ import { useLoaderData } from 'react-router-dom';
 import Loader from '../../../../Components/Loading/Loader';
 import { AuthContext } from '../../../../Context/UserContext';
 import useRole from '../../../../Hooks/useRole';
+import useTitle from '../../../../Hooks/useTitle';
 import CheckOutForm from './CheckOutForm';
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PK);
 
 const Payment = () => {
+    useTitle('Payment|BoiLagbe');
     const bookingData = useLoaderData();
     const { user } = useContext(AuthContext);
     const [role, isLoading] = useRole(user?.email);
