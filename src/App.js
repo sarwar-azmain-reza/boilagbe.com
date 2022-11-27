@@ -14,6 +14,9 @@ import { Toaster } from 'react-hot-toast';
 import SellerRout from './PrivateRoute/SellerRout';
 import Payment from './Pages/Dashboard/Dashboard/Buyer/Payment';
 import NotFound from './Pages/404Page/NotFound';
+import AllBuyers from './Pages/Dashboard/Dashboard/Admin/AllBuyers';
+import AdminRoute from './PrivateRoute/AdminRoute';
+import ReportedItems from './Pages/Dashboard/Dashboard/Admin/ReportedItems';
 function App() {
 
   const router = createBrowserRouter([
@@ -56,6 +59,14 @@ function App() {
         {
           path:'/dashboard',
           element:<Dashboard></Dashboard>
+        },
+        {
+          path:'/dashboard/allbuyers',
+          element:<AdminRoute><AllBuyers></AllBuyers></AdminRoute>
+        },
+        {
+          path:'/dashboard/reporteditems',
+          element:<AdminRoute><ReportedItems></ReportedItems></AdminRoute>
         },
         {
           path:'/dashboard/addproduct',

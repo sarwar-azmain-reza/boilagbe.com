@@ -1,7 +1,7 @@
 import { CheckBadgeIcon } from '@heroicons/react/24/solid';
 import React from 'react';
 
-const CategorisedProductCard = ({ product, setProductInfo }) => {
+const CategorisedProductCard = ({ product, setProductInfo, handleReport }) => {
 
     return (
         <div className="card bg-slate-800 text-white shadow-xl">
@@ -26,7 +26,7 @@ const CategorisedProductCard = ({ product, setProductInfo }) => {
 
                     {product?.status !== 'Sold' && <label htmlFor="bookingModal" className='text-white btn btn-sm btn-info' onClick={() => setProductInfo(product)}>BOOK NOW</label>}
 
-                    {product?.status === 'Sold' && <button className='text-white btn btn-sm cursor-not-allowed'>BOOK NOW</button>}
+                    <button onClick={()=>handleReport(product._id)} className='text-white btn btn-sm '>Report</button>
 
                 </div>
             </div>

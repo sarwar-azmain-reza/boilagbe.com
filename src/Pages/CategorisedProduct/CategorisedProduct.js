@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react';
+import toast from 'react-hot-toast';
 import { useLoaderData } from 'react-router-dom';
 import BookingModal from '../../Components/BookingModal/BookingModal';
 import CategorisedProductCard from '../../Components/CategorisedProductCard/CategorisedProductCard';
@@ -10,11 +11,29 @@ const CategorisedProduct = () => {
     const products = useLoaderData();
     const {user} = useContext(AuthContext);
     const [productInfo,setProductInfo] = useState(null);
+
+    const handleReport = (id) =>{
+        // console.log(id)
+        fetch(`https://boilagbe-com-server.vercel.app/products/report/${id}`, {
+            method: 'PUT',
+            headers: {
+                authorization: `bearer ${localStorage.getItem('boilagbeToken')}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.modifiedCount > 0) {
+                    toast.success('Reported To Admin Successfully.')
+                }
+            })
+
+    }
+
     return (
         <div className='py-10 container mx-auto px-5'>
             <div className='grid lg:grid-cols-3 md:grid-cols-2 gap-5'>
                 {
-                    products.map(product => <CategorisedProductCard key={product._id} product={product} setProductInfo={setProductInfo}></CategorisedProductCard>)
+                    products.map(product => <CategorisedProductCard key={product._id} product={product} setProductInfo={setProductInfo} handleReport={handleReport}></CategorisedProductCard>)
                 }
             </div>
             {

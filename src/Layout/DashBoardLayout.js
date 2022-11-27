@@ -35,8 +35,8 @@ const DashBoardLayout = () => {
                                 role === 'Admin' ?
                                     <>
                                         <li className='border-b font-semibold'><Link to="/dashboard">All Sellers</Link></li>
-                                        <li className='border-b font-semibold'><Link to="/dashboard">All Buyers</Link></li>
-                                        <li className='border-b font-semibold'><Link to="/dashboard">Reported Items</Link></li>
+                                        <li className='border-b font-semibold'><Link to="/dashboard/allbuyers">All Buyers</Link></li>
+                                        <li className='border-b font-semibold'><Link to="/dashboard/reporteditems">Reported Items</Link></li>
                                     </>
                                     :
                                     <>

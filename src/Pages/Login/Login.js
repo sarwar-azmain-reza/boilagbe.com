@@ -5,13 +5,23 @@ import google from '../../Assets/google.png'
 import useTitle from '../../Hooks/useTitle';
 const Login = () => {
     useTitle('Login|BoiLagbe');
-    const { userSignIn, googleSignIn } = useContext(AuthContext);
+    const { userSignIn, googleSignIn, logOut } = useContext(AuthContext);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const location = useLocation();
 
     const from = location.state?.from?.pathname || '/';
+
+    const handleLogout = () => {
+        logOut()
+            .then(() => {
+                navigate('/login');
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }
 
     const handleLogin = event => {
         event.preventDefault();
@@ -32,6 +42,11 @@ const Login = () => {
                 fetch(`https://boilagbe-com-server.vercel.app/jwt?email=${email}`)
                     .then(res => res.json())
                     .then(data => {
+                        console.log(data)
+                        if(data.accessToken===''){
+                            handleLogout();
+                            setError('Account Deleted By Admin');
+                        }
                         if (data.accessToken) {
                             localStorage.setItem('boilagbeToken', data.accessToken);
                         }

@@ -1,3 +1,4 @@
+import { CheckBadgeIcon } from '@heroicons/react/24/solid';
 import React from 'react';
 
 const AdvertisedProducts = (props) => {
@@ -18,7 +19,7 @@ const AdvertisedProducts = (props) => {
                                 </div>
                                 <div className='flex'>
                                     <p className='font-semibold'>Condition: {product?.condition}</p>
-                                    <p className='font-semibold'>Seller: {product.sellerName}</p>
+                                    <p className='font-semibold flex'>Seller: {product.sellerName}{product?.verifiedSeller && <CheckBadgeIcon className='h-4 text-info' />}</p>
                                 </div>
                             </div>
                         </div>
