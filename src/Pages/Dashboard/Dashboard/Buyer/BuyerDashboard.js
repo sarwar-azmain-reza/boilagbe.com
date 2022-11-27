@@ -24,7 +24,7 @@ const BuyerDashboard = () => {
             return data;
         }
     })
-    console.log(mybookings);
+
     if (isLoading) {
         return <Loader></Loader>
     }

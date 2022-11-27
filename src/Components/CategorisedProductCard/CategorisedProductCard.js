@@ -1,3 +1,4 @@
+import { CheckBadgeIcon } from '@heroicons/react/24/solid';
 import React from 'react';
 
 const CategorisedProductCard = ({ product, setProductInfo }) => {
@@ -12,7 +13,12 @@ const CategorisedProductCard = ({ product, setProductInfo }) => {
                 <p className='font-semibold'>Original Price: {product.originalPrice} BDT</p>
                 <p className='font-semibold'>Years Used: {product.yearOfUse}</p>
                 <p className='font-semibold'>Availability: {product?.status ? product?.status : 'Available'}</p>
-                <p className='font-semibold'>Seller: {product.sellerName}</p>
+                <p className='font-semibold'>Condition: {product?.condition}</p>
+                <p className='font-semibold flex'>Seller: {product.sellerName}{
+                    product?.verifiedSeller && <CheckBadgeIcon className='h-4 text-info' />
+                }</p>
+
+
                 <p className='font-semibold'>Posted Date: {product?.postTime ? product?.postTime : 'Not Found'}</p>
                 <p className='font-semibold'>Location: {product.location}</p>
 

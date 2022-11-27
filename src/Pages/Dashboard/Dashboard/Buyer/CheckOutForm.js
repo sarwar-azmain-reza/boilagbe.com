@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
+import toast from 'react-hot-toast';
 const CheckOutForm = ({ bookingData }) => {
 
     const [cardError, setCardError] = useState('');
@@ -90,8 +91,9 @@ const CheckOutForm = ({ bookingData }) => {
                 .then(data => {
                     console.log(data);
                     if (data.insertedId) {
-                        setSuccess('Congrats! your payment completed');
+                        setSuccess('Congratulation. Your Payment Successfull');
                         setTransactionId(paymentIntent.id);
+                        toast.success('Payment Successfull');
                     }
                 })
         }

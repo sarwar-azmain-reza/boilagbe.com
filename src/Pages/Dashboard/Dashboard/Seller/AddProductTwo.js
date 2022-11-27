@@ -54,6 +54,7 @@ const AddProductTwo = () => {
                         image: imgData.data.url,
                         categoryId: form.categoryId.value,
                         description: form.description.value,
+                        yearOfPurchase:form.yearOfPurchase.value,
                         sellerName: user?.displayName,
                         email: user?.email
                     }
@@ -174,8 +175,8 @@ const AddProductTwo = () => {
                                 }
                             </select>
                         </div>
-                    </div>
-                    <div className='grid md:grid-cols-2 gap-4'>
+
+
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Product Description</span>
@@ -183,6 +184,14 @@ const AddProductTwo = () => {
                             <textarea className="textarea textarea-info focus:outline-none w-full" placeholder="Description" name='description' required></textarea>
 
                         </div>
+
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Year Of Purchase</span>
+                            </label>
+                            <input type="number" name='yearOfPurchase' className="input input-bordered focus:outline-none" required />
+                        </div>
+
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Seller Name</span>

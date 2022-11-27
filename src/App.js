@@ -13,6 +13,7 @@ import PrivateRoute from './PrivateRoute/PrivateRoute';
 import { Toaster } from 'react-hot-toast';
 import SellerRout from './PrivateRoute/SellerRout';
 import Payment from './Pages/Dashboard/Dashboard/Buyer/Payment';
+import NotFound from './Pages/404Page/NotFound';
 function App() {
 
   const router = createBrowserRouter([
@@ -66,6 +67,10 @@ function App() {
           element:<Payment></Payment>
         }
       ]
+    },
+    {
+      path:'*',
+      element:<NotFound></NotFound>
     }
   ])
   return (

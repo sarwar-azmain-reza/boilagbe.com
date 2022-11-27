@@ -16,7 +16,10 @@ const AdvertisedProducts = (props) => {
                                     <p>Selling Price: {product.sellingPrice}</p>
                                     <p>Original Price: {product.originalPrice}</p>
                                 </div>
-                                <p className='font-semibold'>Seller: {product.sellerName}</p>
+                                <div className='flex'>
+                                    <p className='font-semibold'>Condition: {product?.condition}</p>
+                                    <p className='font-semibold'>Seller: {product.sellerName}</p>
+                                </div>
                             </div>
                         </div>
                     </div>)

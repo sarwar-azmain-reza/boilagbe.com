@@ -41,7 +41,7 @@ const Home = () => {
 
                 {/* Advertised items - need to have once or more items labaled as advertised */}
                 {
-                    advertisedProducts ? 
+                    advertisedProducts.length ? 
                     <AdvertisedProducts advertisedProducts={advertisedProducts}></AdvertisedProducts>
                     :
                     <></>
