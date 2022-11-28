@@ -35,7 +35,10 @@ const Home = () => {
             <div className='py-10 px-3'>
                 <div className='container mx-auto  grid md:grid-cols-3 gap-5'>
                     {
+                        categories?.length ? 
                         categories.map(category => <Link to={`/category/${category._id}`} key={category._id} className='text-lg font-semibold bg-slate-700 text-white cursor-pointer border py-2 rounded text-center'>{category.category}</Link>)
+                        :
+                        <></>
                     }
                 </div>
 

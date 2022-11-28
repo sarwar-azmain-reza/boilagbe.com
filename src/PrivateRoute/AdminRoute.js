@@ -9,16 +9,18 @@ const AdminRoute = ({children}) => {
     const [role, isLoading] = useRole(user?.email);
     const location = useLocation();
     // console.log(role);
-    if (isLoading) {
+    if (loading || isLoading) {
         return <Loader ></Loader>
     }
 
     if (user && role === 'Admin') {
         return children;
     }
-    return <>
-        <Navigate to="/dashboard" state={{ from: location }} replace></Navigate>
-    </>;
+    if(user && role !=='Admin'){
+        return <Navigate to="/dashboard" state={{ from: location }} replace></Navigate>
+    }
+    return <Navigate to="/login" state={{ from: location }} replace></Navigate>
+
 };
 
 export default AdminRoute;

@@ -14,6 +14,7 @@ const UserContext = ({children}) => {
 
     const [user,setUser] = useState(null);
     const [loading,setLoading] = useState(true);
+
     const userSignUp = (email,password) => {
         setLoading(true);
         return createUserWithEmailAndPassword(auth,email,password);
@@ -45,7 +46,7 @@ const UserContext = ({children}) => {
         return () =>{
             unsubscribe();
         }
-    },[])
+    },[user])
 
     const logOut = ()=> signOut(auth);
 

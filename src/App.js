@@ -58,7 +58,7 @@ function App() {
       children:[
         {
           path:'/dashboard',
-          element:<Dashboard></Dashboard>
+          element:<PrivateRoute><Dashboard></Dashboard></PrivateRoute>
         },
         {
           path:'/dashboard/allbuyers',

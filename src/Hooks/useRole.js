@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 
 const useRole = (email) => {
-    const [role,setRole] = useState('');
-    const [isLoading,setLoading] = useState(true);
+    const [role, setRole] = useState('');
+    const [isLoading, setLoading] = useState(true);
     useEffect(() => {
         if (email) {
+
             fetch(`https://boilagbe-com-server.vercel.app/admin/users/${email}`)
                 .then(res => res.json())
                 .then(data => {
@@ -12,6 +13,10 @@ const useRole = (email) => {
                     setRole(data.accountType);
                     setLoading(false);
                 })
+        }
+        else {
+
+            setLoading(false)
         }
     }, [email])
     return [role, isLoading]

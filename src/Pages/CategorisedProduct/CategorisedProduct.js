@@ -13,7 +13,7 @@ const CategorisedProduct = () => {
     const [productInfo,setProductInfo] = useState(null);
 
     const handleReport = (id) =>{
-        // console.log(id)
+        console.log(id)
         fetch(`https://boilagbe-com-server.vercel.app/products/report/${id}`, {
             method: 'PUT',
             headers: {
@@ -22,7 +22,8 @@ const CategorisedProduct = () => {
         })
             .then(res => res.json())
             .then(data => {
-                if (data.modifiedCount > 0) {
+                console.log(data)
+                if (data.acknowledged) {
                     toast.success('Reported To Admin Successfully.')
                 }
             })
@@ -33,7 +34,10 @@ const CategorisedProduct = () => {
         <div className='py-10 container mx-auto px-5'>
             <div className='grid lg:grid-cols-3 md:grid-cols-2 gap-5'>
                 {
+                    products.length > 0 ?
                     products.map(product => <CategorisedProductCard key={product._id} product={product} setProductInfo={setProductInfo} handleReport={handleReport}></CategorisedProductCard>)
+                    :
+                    <div className='text-2xl font-semibold text-red-500'>No Products Here! </div>
                 }
             </div>
             {
