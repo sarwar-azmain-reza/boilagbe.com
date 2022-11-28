@@ -19,5 +19,5 @@ https://boi-lagbe.web.app/
 * MongoDB
 
 ## Admin Account
-adminEmail: sarwarazmain.cse@gmail.com
-adminPassword: helloworld
+* adminEmail: sarwarazmain.cse@gmail.com
+* adminPassword: helloworld
