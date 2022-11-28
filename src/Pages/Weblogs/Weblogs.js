@@ -1,17 +1,22 @@
 import { ChevronDoubleRightIcon } from '@heroicons/react/24/solid';
 import React, { useState } from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useNavigation } from 'react-router-dom';
+import Loader from '../../Components/Loading/Loader';
 import useTitle from '../../Hooks/useTitle';
 import BlogCard from './BlogCard';
 
 const Weblogs = () => {
     useTitle('Weblog|BoiLagbe');
     const blogs = useLoaderData();
+    const navigation = useNavigation();
     let [showenItem, setShowenItem] = useState(blogs[0]);
     const showDescription = (id) => {
         const item = blogs.find(blog => blog._id === id)
         setShowenItem(item);
         console.log(id);
+    }
+    if(navigation.state ==='loading'){
+        return <Loader></Loader>
     }
     return (
         <div className={`py-10`}>

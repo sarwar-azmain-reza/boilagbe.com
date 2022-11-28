@@ -1,7 +1,7 @@
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import React, { useContext } from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useNavigation } from 'react-router-dom';
 import Loader from '../../../../Components/Loading/Loader';
 import { AuthContext } from '../../../../Context/UserContext';
 import useRole from '../../../../Hooks/useRole';
@@ -12,11 +12,15 @@ const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PK);
 
 const Payment = () => {
     useTitle('Payment|BoiLagbe');
+    const navigation = useNavigation();
     const bookingData = useLoaderData();
     const { user } = useContext(AuthContext);
     const [role, isLoading] = useRole(user?.email);
 
     if (isLoading) {
+        return <Loader></Loader>
+    }
+    if(navigation.state ==='loading'){
         return <Loader></Loader>
     }
     return (

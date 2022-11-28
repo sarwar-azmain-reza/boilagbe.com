@@ -75,7 +75,7 @@ function App() {
         {
           path:'/dashboard/payment/:id',
           loader:({params})=> fetch(`https://boilagbe-com-server.vercel.app/booking/${params.id}`),
-          element:<Payment></Payment>
+          element:<PrivateRoute><Payment></Payment></PrivateRoute>
         }
       ]
     },

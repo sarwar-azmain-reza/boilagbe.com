@@ -1,13 +1,15 @@
 import React, { useContext, useState } from 'react';
 import toast from 'react-hot-toast';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useNavigation } from 'react-router-dom';
 import BookingModal from '../../Components/BookingModal/BookingModal';
 import CategorisedProductCard from '../../Components/CategorisedProductCard/CategorisedProductCard';
+import Loader from '../../Components/Loading/Loader';
 import { AuthContext } from '../../Context/UserContext';
 import useTitle from '../../Hooks/useTitle';
 
 const CategorisedProduct = () => {
     useTitle('Products|BoiLagbe');
+    const navigation = useNavigation();
     const products = useLoaderData();
     const {user} = useContext(AuthContext);
     const [productInfo,setProductInfo] = useState(null);
@@ -29,7 +31,9 @@ const CategorisedProduct = () => {
             })
 
     }
-
+    if(navigation.state ==='loading'){
+        return <Loader></Loader>
+    }
     return (
         <div className='py-10 container mx-auto px-5'>
             <div className='grid lg:grid-cols-3 md:grid-cols-2 gap-5'>

@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData, useNavigation } from 'react-router-dom';
 import { BookOpenIcon, ShieldCheckIcon, CheckCircleIcon } from '@heroicons/react/24/solid'
 import useTitle from '../../Hooks/useTitle';
 import axios from 'axios';
 import AdvertisedProducts from './AdvertisedProducts';
+import Loader from '../../Components/Loading/Loader';
 const Home = () => {
     const categories = useLoaderData();
     useTitle('BoiLagbe');
     const [advertisedProducts, setAdvertisedProducts] = useState([]);
+
+    const navigation = useNavigation();
 
     useEffect(() => {
         axios.get('https://boilagbe-com-server.vercel.app/advertised')
@@ -19,6 +22,10 @@ const Home = () => {
                 console.log(error);
             })
     }, [])
+
+    if(navigation.state ==='loading'){
+        return <Loader></Loader>
+    }
 
     return (
         <>
