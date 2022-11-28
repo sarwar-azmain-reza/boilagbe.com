@@ -17,3 +17,7 @@ https://boi-lagbe.web.app/
 * Node.js
 * Express.js
 * MongoDB
+
+## Admin Account
+adminEmail: sarwarazmain.cse@gmail.com
+adminPassword: helloworld
