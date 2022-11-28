@@ -7,7 +7,7 @@ const Footer = () => {
         <div className='bg-slate-800  py-5 '>
             <div className='grid lg:grid-cols-3 md:grid-cols-2 gap-5  container mx-auto px-5'>
                 <div className='text-white'>
-                    <h1 className='text-xl font-semibold mb-2 border-b'>KIDS CAMP</h1>
+                    <h1 className='text-xl font-semibold mb-2 border-b'>BoiLagbe</h1>
                     <p className='flex mb-2'><MapPinIcon className='h-6 w-6 mr-3' />R-415, Level-4, YKSG, DSC, Dhaka</p>
                     <p className='flex mb-2'><EnvelopeIcon className='h-6 w-6 mr-3' />contact@boilagbe.com</p>
                     <p className='flex mb-2'><PhoneIcon className='h-6 w-6 mr-3' />01745797203</p>
