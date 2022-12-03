@@ -17,10 +17,3 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 export default app;
-
-// apiKey: "AIzaSyCQuZFXn18jjFtvTk3XQ36mtgiWMQXkV5k",
-// authDomain: "boi-lagbe.firebaseapp.com",
-// projectId: "boi-lagbe",
-// storageBucket: "boi-lagbe.appspot.com",
-// messagingSenderId: "80046080858",
-// appId: "1:80046080858:web:4cdbc7cadce86abb1c2963"
