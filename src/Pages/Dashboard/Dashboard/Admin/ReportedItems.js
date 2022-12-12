@@ -73,7 +73,8 @@ const ReportedItems = () => {
                                             <th></th>
                                             <th>Name</th>
                                             <th>Seller Name</th>
-                                            <th>Price</th>
+                                            <th>Report Reason</th>
+                                            <th>Reported By</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -83,7 +84,8 @@ const ReportedItems = () => {
                                                 <th>{i + 1}</th>
                                                 <td>{item.productName}</td>
                                                 <td>{item.sellerName}</td>
-                                                <td>{item.sellingPrice} BDT</td>
+                                                <td>{item?.reportReason}</td>
+                                                <td>{item?.reportedBy}</td>
                                                 <td><button onClick={() => handleDelete(item._id)} className='btn btn-sm text-white btn-error'>Delete</button></td>
                                             </tr>)
                                         }
