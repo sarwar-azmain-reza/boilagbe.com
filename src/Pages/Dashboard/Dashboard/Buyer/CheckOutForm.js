@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import toast from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 const CheckOutForm = ({ bookingData }) => {
 
     const [cardError, setCardError] = useState('');
@@ -110,7 +111,7 @@ const CheckOutForm = ({ bookingData }) => {
                                 base: {
                                     fontSize: '16px',
                                     color: '#424770',
-                                    height:'20px',
+                                    height: '20px',
                                     '::placeholder': {
                                         color: '#aab7c4',
                                     },
@@ -121,12 +122,19 @@ const CheckOutForm = ({ bookingData }) => {
                             },
                         }}
                         className='border p-5 rounded-lg' />
-                    <button
-                        className={`btn btn-sm mt-4 btn-info text-white ${loading ? 'loading' : ''}`}
-                        type="submit"
-                        disabled={!stripe || !clientSecret}>
-                        Pay
-                    </button>
+                    <div className='flex gap-5'>
+                        <button
+                            className={`btn btn-sm mt-4 btn-info text-white ${loading ? 'loading' : ''}`}
+                            type="submit"
+                            disabled={!stripe || !clientSecret}>
+                            Confirm Payment
+                        </button>
+                        <Link to='/dashboard'
+                            className={`btn btn-sm mt-4 btn-error text-white`}
+                            type="submit">
+                            Cancel Payment
+                        </Link>
+                    </div>
                 </div>
             </form>
             <p className="text-red-500">{cardError}</p>

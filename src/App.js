@@ -21,67 +21,66 @@ function App() {
 
   const router = createBrowserRouter([
     {
-      path:'/',
-      element:<Main></Main>,
-      children:[
+      path: '/',
+      element: <Main></Main>,
+      children: [
         {
-          path:'/',
-          loader: ()=> fetch('https://boilagbe-com-server.vercel.app/admin/categories'),
-          element:<Home></Home>
+          path: '/',
+          element: <Home></Home>
         },
         {
-          path:'/weblogs',
-          loader:()=> fetch('https://boilagbe-com-server.vercel.app/blogs'),
-          element:<Weblogs></Weblogs>
+          path: '/weblogs',
+          loader: () => fetch('https://boilagbe-com-server.vercel.app/blogs'),
+          element: <Weblogs></Weblogs>
         },
         {
-          path:'/register',
+          path: '/register',
 
-          element:<Register></Register>
+          element: <Register></Register>
         },
         {
-          path:'/login',
+          path: '/login',
 
-          element:<Login></Login>
+          element: <Login></Login>
         },
         {
-          path:'category/:id',
-          loader:({params})=> fetch(`https://boilagbe-com-server.vercel.app/products/${params.id}`),
-          element:<PrivateRoute><CategorisedProduct></CategorisedProduct></PrivateRoute>
+          path: 'category/:id',
+          loader: ({ params }) => fetch(`https://boilagbe-com-server.vercel.app/products/${params.id}`),
+          element: <PrivateRoute><CategorisedProduct></CategorisedProduct></PrivateRoute>
         }
-        
+
       ]
     },
     {
-      path:'/dashboard',
-      element:<DashBoardLayout></DashBoardLayout>,
-      children:[
+      path: '/dashboard',
+      element: <DashBoardLayout></DashBoardLayout>,
+      children: [
         {
-          path:'/dashboard',
-          element:<PrivateRoute><Dashboard></Dashboard></PrivateRoute>
+          path: '/dashboard',
+          element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>
         },
         {
-          path:'/dashboard/allbuyers',
-          element:<AdminRoute><AllBuyers></AllBuyers></AdminRoute>
+          path: '/dashboard/allbuyers',
+          element: <AdminRoute><AllBuyers></AllBuyers></AdminRoute>
         },
         {
-          path:'/dashboard/reporteditems',
-          element:<AdminRoute><ReportedItems></ReportedItems></AdminRoute>
+          path: '/dashboard/reporteditems',
+          element: <AdminRoute><ReportedItems></ReportedItems></AdminRoute>
         },
         {
-          path:'/dashboard/addproduct',
-          element:<SellerRout><AddProductTwo></AddProductTwo></SellerRout>
+          path: '/dashboard/addproduct',
+          element: <SellerRout><AddProductTwo></AddProductTwo></SellerRout>
         },
         {
-          path:'/dashboard/payment/:id',
-          loader:({params})=> fetch(`https://boilagbe-com-server.vercel.app/booking/${params.id}`),
-          element:<PrivateRoute><Payment></Payment></PrivateRoute>
+          path: '/dashboard/payment/:id',
+          loader: ({ params }) => fetch(`https://boilagbe-com-server.vercel.app/booking/${params.id}`),
+          element: <PrivateRoute><Payment></Payment></PrivateRoute>
         }
       ]
     },
     {
-      path:'*',
-      element:<NotFound></NotFound>
+      path: '*',
+      element: <NotFound></NotFound>
     }
   ])
   return (

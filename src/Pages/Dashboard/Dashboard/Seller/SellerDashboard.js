@@ -93,7 +93,7 @@ const SellerDashboard = () => {
                                                     <th>{i + 1}</th>
                                                     <td>{product.productName}</td>
                                                     <td>{product.sellingPrice}</td>
-                                                    <td className=''>{product?.status ? `${product?.status}` : 'Available'}</td>
+                                                    <td className={`${product?.status ? 'text-success' : ''}`}>{product?.status ? `${product?.status}` : 'Available'}</td>
                                                     <td>{product?.status !== 'Sold' && <button onClick={() => handleAdvertise(product._id)} className={` text-white btn-sm ${product?.advertisement !== 'Advertised' ? 'btn btn-info' : 'disabled bg-slate-500 rounded-md cursor-not-allowed'} `}>{product?.advertisement ? `${product?.advertisement}` : 'Advertise'}</button>}</td>
 
                                                     <td><button onClick={() => handleDelete(product._id)} className='btn btn-sm btn-error'>Delete</button></td>

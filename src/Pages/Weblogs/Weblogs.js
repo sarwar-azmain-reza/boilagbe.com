@@ -15,19 +15,19 @@ const Weblogs = () => {
         setShowenItem(item);
         console.log(id);
     }
-    if(navigation.state ==='loading'){
+    if (navigation.state === 'loading') {
         return <Loader></Loader>
     }
     return (
         <div className={`py-10`}>
-            <h1 className='text-center text-3xl font-semibold'>Read The Weblogs Of KIDS CAMP</h1>
+            <h1 className='text-center text-3xl font-semibold'>Read Weblogs of BoiLagbe</h1>
             <p className='text-center text-xl text-gray-600'>Total Weblogs: {blogs.length}</p>
             <div className='grid lg:grid-cols-4 md:grid-cols-2 gap-10 mt-10 container mx-auto px-5'>
                 {
                     blogs.map(blog => <BlogCard key={blog._id} blog={blog} showDescription={showDescription}></BlogCard>)
                 }
             </div>
-            <div className='mt-20 container mx-auto px-5 text-justify'>
+            <div className='mt-20 container mx-auto px-5 rounded-lg shadow-lg text-justify bg-slate-100 py-10 '>
                 <div className='flex items-center'>
                     <span><ChevronDoubleRightIcon className='h-6 w-6 text-gray-600' /></span>
                     <p className='text-2xl font-bold '>{showenItem.title}</p>

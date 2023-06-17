@@ -54,7 +54,7 @@ const AddProductTwo = () => {
                         image: imgData.data.url,
                         categoryId: form.categoryId.value,
                         description: form.description.value,
-                        yearOfPurchase:form.yearOfPurchase.value,
+                        yearOfPurchase: form.yearOfPurchase.value,
                         sellerName: user?.displayName,
                         email: user?.email
                     }
@@ -199,7 +199,7 @@ const AddProductTwo = () => {
                             <input type="text" name='sellerName' defaultValue={user?.displayName} disabled className="input input-bordered focus:outline-none" required />
                         </div>
                     </div>
-                    <div className="form-control">
+                    <div className="form-control mt-10">
                         <button className={`btn bg-sky-600 border-none ${loading ? 'loading' : ''}`}>Add Product</button>
                     </div>
 

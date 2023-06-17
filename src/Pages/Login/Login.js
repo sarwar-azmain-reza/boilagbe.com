@@ -43,7 +43,7 @@ const Login = () => {
                     .then(res => res.json())
                     .then(data => {
                         console.log(data)
-                        if(data.accessToken===''){
+                        if (data.accessToken === '') {
                             handleLogout();
                             setError('Account Deleted By Admin');
                         }
@@ -105,7 +105,7 @@ const Login = () => {
                         }
                         setLoading(false);
                         console.log('After jwt call', user);
-                        navigate('/');
+                        navigate(from, { replace: true });
                     });
             })
     }
@@ -134,7 +134,7 @@ const Login = () => {
                             </label>
                             <input type="password" name='password' placeholder="password" className="input input-bordered focus:outline-none" required />
                             <label className="label">
-                                <Link to='/signup' className="label-text-alt link link-hover">Don't have an account?</Link>
+                                <Link to='/register' className="label-text-alt link link-hover text-info">Don't have an account?</Link>
                             </label>
                         </div>
                         {error && <p className='text-red-600'>Error: {error}</p>}

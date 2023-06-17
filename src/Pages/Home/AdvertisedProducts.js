@@ -5,11 +5,11 @@ const AdvertisedProducts = (props) => {
     const { advertisedProducts } = props;
     return (
         <div className='mt-10 container mx-auto'>
-            <h1 className='text-3xl font-semibold text-center'>Advertised Books</h1><hr />
+            <h1 className='text-3xl font-semibold text-center'>TOP SELLING BOOKS</h1><hr />
             <div className='mt-10 grid md:grid-cols-3 gap-4'>
                 {
                     advertisedProducts.map(product => <div key={product._id}>
-                        <div className="card card-compact bg-slate-800 text-white shadow-xl">
+                        <div className="card card-compact bg-slate-100  shadow-xl">
                             <figure><img src={product.image} alt="Books" className='h-60 w-full' /></figure>
                             <div className="card-body">
                                 <h2 className="card-title">{product.productName}</h2>

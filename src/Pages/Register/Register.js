@@ -26,8 +26,6 @@ const Register = () => {
                 setError('');
                 handleUpdateUserProfile(name);
                 saveUser(name, email, accountType);
-                
-
 
             })
             .catch(error => {
@@ -39,6 +37,8 @@ const Register = () => {
                 setLoading(false);
             })
     }
+
+    
     const handleUpdateUserProfile = (name) => {
         const profile = {
             displayName: name,
